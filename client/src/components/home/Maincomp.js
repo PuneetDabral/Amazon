@@ -1,6 +1,7 @@
 import React from 'react'
 import Banner from './Banner'
 import './home.css'
+import Slide from './Slide';
 
 const Maincomp = () => {
   return (
@@ -8,6 +9,7 @@ const Maincomp = () => {
     <div className='banner_part'>
 
      <Banner />
+     <Slide />
     </div>
     </div>
   )
