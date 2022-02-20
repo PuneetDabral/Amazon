@@ -1,6 +1,31 @@
-import React from 'react'
+import React,{useState}from 'react'
+import { NavLink } from 'react-router-dom'
 
 const SignUp = () => {
+  const [udata, setUdata] = useState({
+    fname: "",
+    email: "",
+    mobile: "",
+    password: "",
+    cpassword: ""
+});
+
+ console.log(udata);
+
+const adddata = (e) => {
+    const { name, value } = e.target;
+    // console.log(name,value);
+
+    setUdata((pre) => {
+        return {
+            ...pre,
+            [name]: value
+        }
+    })
+};
+
+
+
   return (
     <section>
     <div className="sign_container">
@@ -9,23 +34,52 @@ const SignUp = () => {
       </div>
       <div className='sign_form'>
         <form>
-          <h1>Sign-In</h1>
+          <h1>Sign-Up</h1>
 
-          <div className='form_data'>
-            <label htmlFor='email'>Email</label>
-            <input type='text' name='email' id='email' />
-          </div>
-          <div className='form_data'>
-            <label htmlFor=''>Password</label>
-            <input type='password' name='password' placeholder='At least 6 char' id='password' />
-          </div>
+          <div className="form_data">
+                            <label htmlFor="name">Your name</label>
+                            <input type="text" name="fname"
+                                onChange={adddata}
+                                value={udata.fname}
+                                id="name" />
+                        </div>
+                        <div className="form_data">
+                            <label htmlFor="email">email</label>
+                            <input type="email" name="email"
+                                onChange={adddata}
+                                value={udata.email}
+                                id="email" />
+                        </div>
+                        <div className="form_data">
+                            <label htmlFor="mobile">Mobile number</label>
+                            <input type="number" name="mobile"
+                                onChange={adddata}
+                                value={udata.mobile}
+                                id="mobile" />
+                        </div>
+                        <div className="form_data">
+                            <label htmlFor="password">Password</label>
+                            <input type="password" name="password"
+                                onChange={adddata}
+                                value={udata.password}
+                                id="password" placeholder="At least 6 characters" />
+                        </div>
+                        <div className="form_data">
+                            <label htmlFor="passwordg">Password again</label>
+                            <input type="password" name="cpassword"
+                                onChange={adddata}
+                                value={udata.cpassword}
+                                id="passwordg" />
+                        </div>
           <button className='signin_btn'>Continue</button>
+
+          <div className='signin_info'>
+            <p>Alrady have an account?</p>
+            <NavLink to='/login'>Signin</NavLink>
+          </div>
         </form>
       </div>
-      <div className='create_accountinfo'>
-        <p>New To Amazon</p>
-        <button>Create Your amzon account</button>
-      </div>
+     
     </div>
   </section>
   )
