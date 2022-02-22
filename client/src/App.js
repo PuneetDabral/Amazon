@@ -5,9 +5,10 @@ import Maincomp from './components/home/Maincomp';
 import { Newnav } from './components/newnavbar/Newnav';
 
 import { Routes,Route } from 'react-router-dom';
-import Sign_in from './components/signup_sign/Sign_in';
+import Signin from './components/signup_sign/Sign_in';
 import SignUp from './components/signup_sign/SignUp';
 import Cart from './components/cart/Cart';
+import BuyNow from './components/buynow/BuyNow';
 
 function App() {
   return (
@@ -16,9 +17,10 @@ function App() {
     <Newnav />
     <Routes>
     <Route path="/" element={<Maincomp />} />
-    <Route path="/login" element={<Sign_in />} />
+    <Route path="/login" element={<Signin />} />
     <Route path="/register" element={<SignUp />} />
     <Route path="/getproductsone/:id" element={<Cart />} />
+    <Route path="/buynow" element={<BuyNow />} />
     </Routes>
  
     <Footer />
