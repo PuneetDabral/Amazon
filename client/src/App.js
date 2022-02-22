@@ -7,6 +7,7 @@ import { Newnav } from './components/newnavbar/Newnav';
 import { Routes,Route } from 'react-router-dom';
 import Sign_in from './components/signup_sign/Sign_in';
 import SignUp from './components/signup_sign/SignUp';
+import Cart from './components/cart/Cart';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
     <Route path="/" element={<Maincomp />} />
     <Route path="/login" element={<Sign_in />} />
     <Route path="/register" element={<SignUp />} />
+    <Route path="/getproductsone/:id" element={<Cart />} />
     </Routes>
  
     <Footer />
