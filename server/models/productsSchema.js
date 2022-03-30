@@ -1,18 +1,18 @@
-const { Mongoose } = require("mongoose")
-import { products } from './../../client/src/components/home/productdata';
+const mongoose = require('mongoose');
 
-const productsSchema = new Mongoose.Schema({
+
+const productsSchema = new mongoose.Schema({
     id:String,
     url:String,
     detailsUrl:String,
-    title:object,
-    price:object,
+    title:Object,
+    price:Object,
     description:String,
     discount:String,
     tagline:String,
 
 });
 
-const Products = new Mongoose.model('products',productsSchema);
+const Products = new mongoose.model('products',productsSchema);
 
 module.exports = Products;

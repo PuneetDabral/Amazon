@@ -1,6 +1,6 @@
- const products = [
+const products = [
     { 
-        id: 'product1',
+        id:"products1",
         url: 'https://rukminim1.flixcart.com/image/150/150/kapoo7k0/electric-kettle/p/6/s/pigeon-favourite-original-imafs7xhj5uwgrh4.jpeg?q=70', 
         detailUrl: 'https://rukminim1.flixcart.com/image/416/416/kapoo7k0/electric-kettle/p/6/s/pigeon-favourite-original-imafs7xhj5uwgrh4.jpeg?q=70',
         title: {
@@ -17,7 +17,7 @@
         tagline: 'Deal of the day' 
     },
     { 
-        id: 'product2',
+        id:"products2",
         url: 'https://rukminim1.flixcart.com/image/416/416/kl6wx3k0/sandwich-maker/8/r/d/sandwich-01-flipkart-smartbuy-original-imagydds4zthxt8z.jpeg?q=70', 
         detailUrl: 'https://rukminim1.flixcart.com/image/416/416/kl6wx3k0/sandwich-maker/8/r/d/sandwich-01-flipkart-smartbuy-original-imagydds4zthxt8z.jpeg?q=70',
         title: {
@@ -34,7 +34,7 @@
         tagline: 'Pestige, Nova & more' 
     },
     { 
-        id: 'product3',
+         id:"products3",
         url: 'https://rukminim1.flixcart.com/image/150/150/kohigsw0/resistance-tube/c/s/e/new-adjustable-single-resistance-tube-multicolor-na-ajro-deal-original-imag2xg88mhmwxz5.jpeg?q=70', 
         detailUrl: 'https://rukminim1.flixcart.com/image/416/416/kohigsw0/resistance-tube/c/s/e/new-adjustable-single-resistance-tube-multicolor-na-ajro-deal-original-imag2xg88mhmwxz5.jpeg?q=70', 
         title: {
@@ -51,7 +51,7 @@
         tagline: 'Deal of the Day' 
     },
     { 
-        id: 'product4',
+         id:"products4",
         url: 'https://rukminim1.flixcart.com/image/300/300/kll7bm80/smartwatch/c/1/n/43-mo-sw-sense-500-android-ios-molife-original-imagyzyycnpujyjh.jpeg?q=70', 
         detailUrl: 'https://rukminim1.flixcart.com/image/416/416/kll7bm80/smartwatch/c/1/n/43-mo-sw-sense-500-android-ios-molife-original-imagyzyycnpujyjh.jpeg?q=70',
         title: {
@@ -68,7 +68,7 @@
         tagline: 'Best Seller' 
     },
     { 
-        id: 'product5',
+         id:"products5",
         url: 'https://rukminim1.flixcart.com/image/416/416/k3uhhu80/hair-dryer/n/m/t/nova-2800-w-professional-nhp-8220-original-imafmvwfhmzsxdrw.jpeg?q=70',
         detailUrl: 'https://rukminim1.flixcart.com/image/416/416/k3uhhu80/hair-dryer/n/m/t/nova-2800-w-professional-nhp-8220-original-imafmvwfhmzsxdrw.jpeg?q=70', 
         title: {
@@ -84,6 +84,6 @@
         discount: 'From ₹499', 
         tagline: 'Kubra, Nova & more' 
     }
-]
+];
 
-module.exports= products;
+module.exports = products;
