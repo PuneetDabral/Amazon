@@ -6,4 +6,4 @@ const rootReducer = combineReducers({
     getProductsData:getProductsreducer
 });
 
-export default rootReducer;
+export default rootReducer; 
