@@ -5,6 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 // import { products } from './productdata';
 import { Divider } from '@mui/material';
 import { NavLink } from "react-router-dom";
+// import {navigation} from ''
 
 const responsive = {
     desktop: {
@@ -22,6 +23,10 @@ const responsive = {
 };
 
 const Slide = ({ title, products }) => {
+
+    // const sendData=()=>{
+    //     navigation('/',{state:e.id})
+    // }
 
 console.log(products)
     return (
@@ -48,9 +53,9 @@ console.log(products)
                 containerClass="carousel-container"
             >
                 {
-                products.length>0 &&   products.map((e, i) => {
+                products.length>0 &&   products.map((e) => {
                         return (
-                            <NavLink to={`/getproductsone/${e.id}`} key={i}>
+                            <NavLink to={`/getproductsone/${e.id}`} >
                                 <div className="products_items">
                                     <div className="product_img">
                                         <img src={e.url} alt="product" />
