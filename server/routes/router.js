@@ -4,6 +4,7 @@ const router = new express.Router();
 const Products = require('../models/productsSchema');
 const USER = require('../models/userSchema')
 
+
 //get product data api
 router.get('/getproducts',async(req,res)=>{
     try{
@@ -59,6 +60,7 @@ router.post("/register", async (req, res) => {
             });
 
             // yaha pe hasing krenge
+            
 
             const storedata = await finaluser.save();
             // console.log(storedata + "user successfully added");
