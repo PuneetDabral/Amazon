@@ -1,12 +1,15 @@
 import React ,{useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import './signup.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Sign_in = () => {
   
   const [logdata,setData]=useState({
     email:'',
     password:''
   })
+  console.log(logdata)
 
   console.log(logdata)
   const adddata =(e)=>{
@@ -20,7 +23,46 @@ const Sign_in = () => {
    })
   }
   
-  // first chnage the sate using setdata then show show that value on form using logdata
+  // first chnage the sate using setdata then show s that value on form using logdata
+
+  const sendData =async(e)=>{
+    e.preventDefault();
+
+  const {  email, password } = logdata;
+  try {
+      const res = await fetch("/login", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+              email, password
+          })
+      });
+
+      const data = await res.json();
+      console.log(data);
+
+      if (res.status === 400 || !data) {
+          toast.error("Invalid Details 👎!", {
+              position: "top-center"
+          });
+      } else {
+          setData({
+              ...logdata, email: "",
+               password: ""
+          });
+          toast.success("Login Successfully done 😃!", {
+              position: "top-center"
+          });
+      }
+  } catch (error) {
+      console.log("front end ka catch error hai" + error.message);
+  }
+
+  }
+
+
   return (
   
    <section>
@@ -29,7 +71,7 @@ const Sign_in = () => {
          <img src='./blacklogoamazon.png' alt='logo' />
        </div>
        <div className='sign_form'>
-         <form>
+         <form method='POST'>
            <h1>Sign-In</h1>
 
            <div className='form_data'>
@@ -46,9 +88,10 @@ const Sign_in = () => {
               value={logdata.password}
               placeholder='At least 6 char' id='password' />
            </div>
-           <button className='signin_btn'>Continue</button>
+           <button className='signin_btn' onClick={sendData}>Continue</button>
          </form>
        </div>
+       <ToastContainer />
        <div className='create_accountinfo'>
          <p>New To Amazon</p>
         <NavLink to='/register'> <button>Create Your amzon account</button></NavLink>

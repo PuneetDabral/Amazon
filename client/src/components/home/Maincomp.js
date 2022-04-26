@@ -5,6 +5,7 @@ import Slide from './Slide'
 import { getProducts } from '../redux/actions/action';
 import { useSelector, useDispatch } from "react-redux";
 
+//get all product 
 const Maincomp = () => {
   const {products} = useSelector(state=>state.getproductsdata);
   console.log(products)

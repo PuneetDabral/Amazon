@@ -3,6 +3,7 @@ const router = new express.Router();
 //produuct schema
 const Products = require('../models/productsSchema');
 const USER = require('../models/userSchema')
+const bcrypt = require("bcryptjs");
 
 
 //get product data api
@@ -42,7 +43,7 @@ router.post("/register", async (req, res) => {
 
     if (!fname || !email || !mobile || !password || !cpassword) {
         res.status(422).json({ error: "filll the all details" });
-        console.log("bhai nathi present badhi details");
+        console.log("fill all the details");
     };
 
     try {
@@ -73,6 +74,35 @@ router.post("/register", async (req, res) => {
     }
 
 });
+
+//login api
+router.post("/login", async (req, res) => {
+    const { email, password} = req.body;
+
+    if(!email || !password){
+        res.status(422).json({ error: "filll the all details" });
+
+    }
+
+    try{ 
+        const userlogin = await USER.findOne({ email: email });
+        console.log(userlogin+"user value"); //userlogin data base passward 
+       
+        if(userlogin){
+            const isMatch = await bcrypt.compare(password, userlogin.password);
+            console.log(isMatch)
+            
+            if(!isMatch){
+                res.status(400).json({error: "password is not matching"});
+            }else{
+                res.status(201).json(userlogin);
+            }
+           
+        }
+    }catch(err){
+        res.status(422).json({ error: "invalid details" });
+    }
+})
 
 
 module.exports =    router;
