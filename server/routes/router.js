@@ -134,4 +134,20 @@ router.post("/addcart/:id",authenticate, async (req, res) => {
   }
 });
 
+
+//get cart details 
+router.get("/cartdetails",authenticate, async (req, res) => {
+  try{
+    const buyuser = await USER.findOne({_id:req.userID});
+    console.log(buyuser + "user avilable");
+    if(buyuser){
+      res.status(201).json(buyuser);
+    }
+
+  }catch(err){
+      console.log(err);
+  }
+
+})
+
 module.exports = router;
