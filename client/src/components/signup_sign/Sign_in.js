@@ -1,8 +1,10 @@
-import React ,{useState} from 'react'
+import React ,{useContext, useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import './signup.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { LoginContext } from "../context/ContextProvider";
+
 const Sign_in = () => {
   
   const [logdata,setData]=useState({
@@ -10,6 +12,8 @@ const Sign_in = () => {
     password:''
   })
   console.log(logdata)
+
+  const { account, setAccount } = useContext(LoginContext);
 
   console.log(logdata)
   const adddata =(e)=>{
@@ -52,6 +56,7 @@ const Sign_in = () => {
               ...logdata, email: "",
                password: ""
           });
+          setAccount(data);
           toast.success("Login Successfully done 😃!", {
               position: "top-center"
           });

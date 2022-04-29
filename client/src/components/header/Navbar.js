@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./navbar.css";
 import SearchIcon from "@material-ui/icons/Search";
 import Badge from "@material-ui/core/Badge";
@@ -12,7 +12,31 @@ const Navbar = () => {
   // console.log(account.carts.length);
   // const cart = account.carts.length;
 
-  // const cart = 2
+  const getdetails = async () => {
+    const res = await fetch("/validuser", {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        credentials: "include"
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (res.status !== 201) {
+        console.log("first login");
+    } else {
+         console.log("cart add ho gya hain");
+        setAccount(data);
+    }
+}
+
+useEffect(() => {
+    getdetails();
+},[]);
+
 
   return (
     <header>
@@ -36,8 +60,7 @@ const Navbar = () => {
             <NavLink to="/login">signin</NavLink>
           </div>
           <div className="cart_btn">
-            {
-              account ? (
+            {account ? (
               <NavLink to="/buynow">
                 <Badge badgeContent={account.carts.length} color="primary">
                   <ShoppingCartIcon id="icon" />
@@ -53,11 +76,11 @@ const Navbar = () => {
 
             <p>Cart</p>
           </div>
-          {
-            account ? (
-                 <Avatar className="avtar2" >{account.fname[0].toUpperCase()}</Avatar>
-            ) : ( <Avatar className="avatar" ></Avatar>)
-          }
+          {account ? (
+            <Avatar className="avtar2">{account.fname[0].toUpperCase()}</Avatar>
+          ) : (
+            <Avatar className="avatar"></Avatar>
+          )}
         </div>
       </nav>
     </header>

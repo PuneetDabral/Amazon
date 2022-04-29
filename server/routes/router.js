@@ -150,4 +150,41 @@ router.get("/cartdetails",authenticate, async (req, res) => {
 
 })
 
+
+//get valid user
+router.get("/validuser",authenticate,async(req,res)=>{
+  try {
+      const validuserone = await USER.findOne({_id:req.userID});
+      console.log(validuserone + "user hain home k header mai");
+      res.status(201).json(validuserone);
+  } catch (error) {
+      console.log(error+"error for valid user");
+  }
+});
+
+
+// remove iteam from the cart
+
+router.delete("/remove/:id",authenticate,async(req,res)=>{
+  try {
+      const {id} = req.params;
+
+      req.rootUser.carts = req.rootUser.carts.filter((curel)=>{
+          return curel.id !=id
+      });
+
+      req.rootUser.save();
+      res.status(201).json(req.rootUser);
+      console.log("iteam remove");
+
+  } catch (error) {
+      // console.log(error + "jwt provide then remove");
+      res.status(400).json(error);
+  }
+});
+
+
+
+
+
 module.exports = router;
