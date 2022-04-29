@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './cart.css';
 import { Divider } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { LoginContext  } from '../context/ContextProvider';
 
 const Cart = () => {
 
   const {id} = useParams("");
   // console.log(id)
 
-  const [inddata,setIndedata] = useState("");
+  const history = useNavigate("")
+
+  const {account,setAccount} = useContext(LoginContext)
+
+  const [inddata,setIndedata] = useState();
 
   // console.log([inddata]);
 
@@ -63,8 +68,8 @@ const Cart = () => {
         alert("no data available")
     }else{
         console.log("produuct added in cart");
-        // setAccount(data1)
-        // history.push("/buynow");
+        history("/buynow");
+        setAccount(data1)
     }
 }
 
