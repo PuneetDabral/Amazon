@@ -62,7 +62,7 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.generateAuthToken = async function () {
   try{
     let token = jwt.sign({ _id: this._id},secretKey);
-    this.tokens = this.tokens.concat({ token:token });
+    this.tokens = this.tokens.concat({ token:token }); //to store the data using concat method
     await this.save();
     return token;
   }catch(err){
@@ -73,17 +73,16 @@ userSchema.methods.generateAuthToken = async function () {
 
 //add to cart data
 //instance methods 
-userSchema.methods.addToCart = async function (cart) {
-  try{
-    this.carts = this.carts.concat(cart);
-    await this.save();
-    return this.carts;
-
-  }catch(err){
-    console.log(err);
+userSchema.methods.addcartdata = async function(cart){
+  try {
+      this.carts = this.carts.concat(cart);
+      await this.save();
+      return this.carts;
+  } catch (error) {
+      console.log(error + "cart add krne mai error");
   }
-
 }
+
 
 
 

@@ -38,6 +38,40 @@ const Cart = () => {
       setTimeout(getinddata,1000)
   },[id]);
 
+
+  //add to cart function
+
+  const addtocart = async(id)=>{
+    console.log(id);
+    const check = await fetch(`/addcart/${id}`,{
+        method:"POST",
+        headers:{
+            Accept:"application/json",
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            inddata
+        }),
+        credentials:"include"
+    });
+    // console.log(check);
+    const data1 = await check.json();
+    console.log(data1 +  'ok');
+    // alert('data added')
+
+    if(check.status !== 201){
+        alert("no data available")
+    }else{
+        console.log("produuct added in cart");
+        // setAccount(data1)
+        // history.push("/buynow");
+    }
+}
+
+
+
+
+
   return (
     <div className='cart_section'>
         {inddata && Object.keys(inddata).length &&
@@ -45,7 +79,7 @@ const Cart = () => {
             <div className='left_cart'>
               <img src={inddata.url} alt="cart_img" />
               <div className='cart_btn'>
-                <button className='cart_btn1'>Add to cart</button>
+                <button className='cart_btn1' onClick={()=>addtocart(inddata.id)}>Add to cart</button>
                 <button className='cart_btn2'>Buy Now</button>
               </div>
             </div>

@@ -108,27 +108,29 @@ router.post("/login", async (req, res) => {
 
 //adding data into cart
 
-router.post("/addcart/:id", authenticate, async (req, res) => {
+// adding the data into cart
+router.post("/addcart/:id",authenticate, async (req, res) => {
+
   try {
-    const { id } = req.params;
-    const cart = await Products.findOne({ id: id });
-    console.log(cart + "cartvalue");
+      console.log("perfect 6");
+      const { id } = req.params;
+      const cart = await Products.findOne({ id: id });
+      console.log(cart + "cart avilable");
 
-    const UserContact = await USER.findOne({ _id: req.userID });
-    console.log(UserContact);
+      const Usercontact = await USER.findOne({_id:req.userID});
+      console.log(Usercontact + "user avilable");
 
-    if(UserContact){
-        const cartdata = await UserContact.addToCart(cart);
-        await UserContact.save();
-        console.log(cartdata);
-        res.status(201).json(UserContact);
-    }
-    else{
-      res.status(401).json({error:"invalid user"});
 
-    }
-  } catch (err) {
-    res.status(401).json({error:"invalid user"});
+      if (Usercontact) {
+          const cartData = await Usercontact.addcartdata(cart);
+
+          await Usercontact.save();
+          console.log(cartData + " cart value");
+          console.log(Usercontact+ "user value");
+          res.status(201).json(Usercontact);
+      }
+  } catch (error) {
+      console.log(error);
   }
 });
 
