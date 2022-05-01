@@ -119,7 +119,7 @@ const Navbar = () => {
             <MenuIcon style={{ color: "#fff" }} />
           </IconButton>
           <Drawer open={dropen} onClose={handleClosedr}>
-            <Rightheader logclose={handleClosedr} />
+            <Rightheader logclose={handleClosedr} logoutuser={logoutuser} />
           </Drawer>
           <div className="navlogo">
             <NavLink to="/">
