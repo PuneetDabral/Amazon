@@ -4,7 +4,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Avatar from "@material-ui/core/Avatar";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { LoginContext } from "../context/ContextProvider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -17,6 +17,7 @@ const Navbar = () => {
   const { account, setAccount } = useContext(LoginContext);
   // console.log(account.carts.length);
   // const cart = account.carts.length;
+  const history = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -52,6 +53,38 @@ const Navbar = () => {
   useEffect(() => {
     getdetails();
   }, []);
+
+  const logoutuser = async () => {
+    const res2 = await fetch("/logout", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    const data2 = await res2.json();
+    console.log(data2);
+
+    if (res2.status !== 201) {
+      console.log("first login");
+    } else {
+      console.log("cart add ho gya hain");
+      setAccount(false);
+      alert('log out ho gya hai')
+      history('/')
+    }
+  };
+
+
+
+
+
+
+
+
+
 
   // for drawer
 
@@ -146,7 +179,7 @@ const Navbar = () => {
            
             <MenuItem onClick={handleClose}>My account</MenuItem>
             {
-              account ?   <MenuItem onClick={handleClose}><LogoutIcon style={{fontSize:16,marginRight:3}}/>Logout</MenuItem> : ""
+              account ?   <MenuItem onClick={handleClose} onClick={logoutuser} ><LogoutIcon style={{fontSize:16,marginRight:3}}/>Logout</MenuItem> : ""
             }
           
           </Menu>

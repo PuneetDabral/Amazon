@@ -184,7 +184,24 @@ router.delete("/remove/:id",authenticate,async(req,res)=>{
 });
 
 
+//log out 
+router.get('/logout',authenticate,async(req,res)=>{
+  try{
+    req.rootUser.tokens =  req.rootUser.tokens.filter((token)=>{
+        return token.token !=req.token
+    })
 
+    res.clearCookie('Amazonweb',{path:'/'});
+    req.rootUser.save();
+    res.status (201).json(req.rootUser.tokens);
+    console.log("logout");
+
+  }catch(err){
+    // res.status (201).json(req.rootUser.tokens);
+    console.log(err+"error for logout");
+  }
+
+})
 
 
 module.exports = router;
