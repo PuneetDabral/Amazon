@@ -12,12 +12,18 @@ import Drawer from "@mui/material/Drawer";
 import Rightheader from "./Rightheader";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+
 const Navbar = () => {
   const { account, setAccount } = useContext(LoginContext);
   // console.log(account.carts.length);
   // const cart = account.carts.length;
-  const history = useNavigate()
+  const history = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -27,7 +33,14 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
+
+
   const [dropen, setDropen] = useState(false);
+  const [text, setText] = useState("");
+
+  console.log(text)
+  const [liopen, setLiopen] = useState(true);
+  const {products} = useSelector(state=>state.getproductsdata);
 
   const getdetails = async () => {
     const res = await fetch("/validuser", {
@@ -49,6 +62,8 @@ const Navbar = () => {
       setAccount(data);
     }
   };
+
+  
 
   useEffect(() => {
     getdetails();
@@ -72,19 +87,13 @@ const Navbar = () => {
     } else {
       console.log("cart add ho gya hain");
       setAccount(false);
-      alert('log out ho gya hai')
-      history('/')
+      // alert('log out ho gya hai')
+      toast.success("Logout Successfully done 😃!", {
+        position: "top-center",
+      });
+      history("/");
     }
   };
-
-
-
-
-
-
-
-
-
 
   // for drawer
 
@@ -96,10 +105,11 @@ const Navbar = () => {
     setDropen(false);
   };
 
-  // const getText = (text)=>{
-  //     setText(text)
-  //     setLiopen(false)
-  // }
+  //get the value of input
+  const getText = (text) => {
+    setText(text);
+    setLiopen(false);
+  };
 
   return (
     <header>
@@ -118,10 +128,23 @@ const Navbar = () => {
             </NavLink>
           </div>
           <div className="nav_searchbaar">
-            <input type="text" placeholder="Search" />
+            <input type="text" placeholder="Search" onChange={(e)=>getText(e.target.value)} />
             <div className="search_icon">
               <SearchIcon id="search" />
             </div>
+            {/* search filter */}
+            {
+              text  && <List className="extrasearch" hidden={liopen}>
+              {
+                products.filter(product =>product.title.longTitle.toLowerCase().includes(text.toLowerCase())).map(product=>(
+                  <ListItem key={product.id}>
+                    <NavLink to={`getproductsone/${product.id}`}>{product.title.longTitle}</NavLink>
+                  </ListItem>
+                ))
+              }
+
+              </List>
+            }
           </div>
         </div>
         <div className="right">
@@ -142,6 +165,7 @@ const Navbar = () => {
                 </Badge>
               </NavLink>
             )}
+            <ToastContainer />
 
             <p>Cart</p>
           </div>
@@ -176,12 +200,15 @@ const Navbar = () => {
               "aria-labelledby": "basic-button",
             }}
           >
-           
             <MenuItem onClick={handleClose}>My account</MenuItem>
-            {
-              account ?   <MenuItem onClick={handleClose} onClick={logoutuser} ><LogoutIcon style={{fontSize:16,marginRight:3}}/>Logout</MenuItem> : ""
-            }
-          
+            {account ? (
+              <MenuItem onClick={handleClose} onClick={logoutuser}>
+                <LogoutIcon style={{ fontSize: 16, marginRight: 3 }} />
+                Logout
+              </MenuItem>
+            ) : (
+              ""
+            )}
           </Menu>
         </div>
       </nav>
