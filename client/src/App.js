@@ -9,11 +9,24 @@ import Signin from './components/signup_sign/Sign_in';
 import SignUp from './components/signup_sign/SignUp';
 import Cart from './components/cart/Cart';
 import BuyNow from './components/buynow/BuyNow';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [data,SetData]= useState(false);
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      SetData(true);
+    },2000)
+
+  },[])
   return (
     <>
-    <Navbar />
+    {
+      data?(
+        <>
+        <Navbar />
     <Newnav />
     <Routes>
     <Route path="/" element={<Maincomp />} />
@@ -24,6 +37,15 @@ function App() {
     </Routes>
  
     <Footer />
+
+        </>
+      ):(<div className='circle'>
+      <CircularProgress/>
+      {/* <h2>Loading...</h2> */}
+
+      </div>)
+    }
+   
     </>
   );
 }

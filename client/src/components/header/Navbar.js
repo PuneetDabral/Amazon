@@ -138,7 +138,7 @@ const Navbar = () => {
               {
                 products.filter(product =>product.title.longTitle.toLowerCase().includes(text.toLowerCase())).map(product=>(
                   <ListItem key={product.id}>
-                    <NavLink to={`getproductsone/${product.id}`}>{product.title.longTitle}</NavLink>
+                    <NavLink to={`getproductsone/${product.id}` } onClick={()=>setLiopen(true)}>{product.title.longTitle}</NavLink>
                   </ListItem>
                 ))
               }

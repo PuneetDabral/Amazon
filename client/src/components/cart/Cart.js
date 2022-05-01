@@ -4,6 +4,7 @@ import { Divider } from '@mui/material';
 import { useNavigate,useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { LoginContext  } from '../context/ContextProvider';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Cart = () => {
 
@@ -14,7 +15,7 @@ const Cart = () => {
 
   const {account,setAccount} = useContext(LoginContext)
 
-  const [inddata,setIndedata] = useState();
+  const [inddata,setIndedata] = useState("");
 
   // console.log([inddata]);
 
@@ -108,7 +109,7 @@ const Cart = () => {
 
         }
         {!inddata ?  <div className="circle">
-            {/* <CircularProgress /> */}
+            <CircularProgress />
             <h2> Loading....</h2>
           </div> : ""}
     </div>
