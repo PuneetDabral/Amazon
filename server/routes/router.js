@@ -85,7 +85,12 @@ router.post("/login", async (req, res) => {
       const isMatch = await bcrypt.compare(password, userlogin.password);
       // console.log(isMatch)
 
-      //token genration (so taht our login save for some time)
+
+
+      if (!isMatch) {
+        res.status(400).json({ error: "password is not matching" });
+      } else {
+              //token genration (so taht our login save for some time)
       const token = await userlogin.generateAuthToken();
       // console.log(token);
       res.cookie("Amazonweb", token, {
@@ -93,9 +98,6 @@ router.post("/login", async (req, res) => {
         httpOnly: true,
       });
 
-      if (!isMatch) {
-        res.status(400).json({ error: "password is not matching" });
-      } else {
         res.status(201).json(userlogin);
       }
     } else {
